@@ -1,0 +1,168 @@
+<nav class="navlist">
+  <ul>
+     <li><h4><a href=""><img src="./../../assets/image/logo.png" alt="Logo"></a></h4></li>
+      <li><a href="http://127.0.0.1:5501/index.html">HOME</a></li>
+      <li><a href="#">CIA 1</a></li>
+      <li><a href="http://localhost:6969/">CIA 2</a></li>
+      <li><a href="#">CIA 3</a></li>
+      <li><a href="#">ESE</a></li>
+      <li><a href="#">RBT</a></li>
+      <li><a href="#">Course Outcome</a></li>
+      <li><a href="#">Course Plan</a></li>
+  </ul>
+</nav>
+
+
+<nav class="navbar navbar-light bg-primary">
+    <div class="container-fluid">
+        <h3 style="color: aliceblue;">Course Plan</h3>
+        <div class="d-flex">
+            <button (click)="clickAddCourse()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success">Add Course Plan</button>
+        </div>
+    </div>
+</nav>
+
+
+<table class="table mt-3">
+    <thead>
+        <th scope="col">Week</th>
+        <th scope="col">No of hours</th>
+        <th scope="col">Unit</th>
+        <th scope="col">Topic/Sub Topic</th>
+        <th scope="col">Details</th>
+        <th scope="col">Teaching Method</th>
+        <th scope="col">Reference</th>
+        <th scope="col">Action</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of crsplnData">
+            <td>{{row.week}}</td>
+            <td>{{row.hour}}</td>
+            <td>{{row.unit}}</td>
+            <td>{{row.topic}}</td>
+            <td>{{row.details}}</td>
+            <td>{{row.teachingMethod}}</td>
+            <td>{{row.referenceMaterial}}</td>
+            <td>
+                <button (click)="onEdit(row)" class="btn btn-info" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+                <button (click)="deleteCourse(row)" class="btn btn-danger mx-3">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p id="height">
+
+</p>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Course Plan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formValue">
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Enter Week (Number)</label>
+                  <input type="number" formControlName="week" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">No. of Hours</label>
+                  <input type="number" formControlName="hour" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Unit Number</label>
+                    <input type="number"  formControlName="unit"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Topic/Sub Topic(Number)</label>
+                    <input type="number" formControlName="topic" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Details</label>
+                    <select class="form-select"  formControlName="details"aria-label="Default select example">
+                        <option selected>Open this select menu</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Not Completed">Not Completed</option>
+                      </select>
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Teaching Method</label>
+                  <select class="form-select" formControlName="teachingMethod" aria-label="Default select example">
+                      <option selected>Open this select menu</option>
+                      <option value="Synchronous">Synchronous</option>
+                      <option value="Asynchronous">Asynchronous</option>
+                      <option value="Self Study">Self Study</option>
+
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Reference Material</label>
+                    <input type="text" formControlName="referenceMaterial" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    
+                  </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" *ngIf="showAdd" (click)="postCoursePlan()" data-bs-dismiss="modal" class="btn btn-primary">Add</button>
+          <button type="button" *ngIf="showUpdate" (click)="updateCoursePlan()" data-bs-dismiss="modal" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer">
+    <div class="main-content">
+        <div class="left box">
+            <h4>CHRIST</h4>
+            <div class="content">
+                <p>
+                    (Deemed to be University) 
+                </p>
+                <p>
+                    Kengeri Campus, Kumbalgodu, Kanmanike, Bengaluru - 560075
+                </p>
+                <p>
+                    Tel: +91 804012 9100 / 9600
+                </p>
+                <p>
+                    Fax: 40129000
+                </p>
+                <p>
+                    Email: mail@christuniversity.in
+                </p>
+                <p>
+                    Web: http://www.christuniversity.in
+                </p>
+            </div>
+        </div>
+        
+        <div class="right box">
+            <h4>Vision</h4>
+            <div class="content">
+                
+                    <p>
+                        EXCELLENCE AND SERVICE
+                    </p>
+                    <h4>
+                        Mission
+                    </h4>
+                    <p>
+                        CHRIST (Deemed to be University) is a nurturing ground for an individual's holistic development to make effective contribution to the society in a dynamic environment.
+                    </p>
+                    <p>
+                     -
+                    </p>
+                    <p>
+                        Website developed by IIIC Team 4.
+                    </p>
+
+                
+            </div>
+        </div>
